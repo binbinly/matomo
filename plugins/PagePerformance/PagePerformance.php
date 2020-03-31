@@ -16,7 +16,7 @@ use Piwik\Plugin\ViewDataTable;
  */
 class PagePerformance extends \Piwik\Plugin
 {
-    protected $availableForMethods = [
+    public static $availableForMethods = [
         'getPageUrls',
         'getEntryPageUrls',
         'getExitPageUrls',
@@ -88,7 +88,7 @@ class PagePerformance extends \Piwik\Plugin
         }
 
         // remove additional metrics for action reports that don't have data
-        if (!in_array($params['action'], $this->availableForMethods)) {
+        if (!in_array($params['action'], self::$availableForMethods)) {
             $dataTable->deleteColumns([
                 'sum_time_latency',
                 'nb_hits_with_time_latency',
@@ -133,7 +133,7 @@ class PagePerformance extends \Piwik\Plugin
     {
         $module = $view->requestConfig->getApiModuleToRequest();
         $method = $view->requestConfig->getApiMethodToRequest();
-        if ('Actions' === $module && in_array($method, $this->availableForMethods)) {
+        if ('Actions' === $module && in_array($method, self::$availableForMethods)) {
             $view->config->columns_to_display[] = 'avg_page_load_time';
         }
     }
