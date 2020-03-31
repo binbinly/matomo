@@ -13,7 +13,6 @@ language: php
 
 services:
   - redis-server
-  - mysql
 
 addons:
   apt:
@@ -82,7 +81,6 @@ matrix:
       sudo: false
 
 dist: bionic
-
 
 script: $PIWIK_ROOT_DIR/tests/travis/travis.sh
 
